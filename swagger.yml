@@ -1,0 +1,127 @@
+swagger: "2.0"
+info:
+  description: swagger file
+  version: "1.0.0"
+  title: swagger file
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: "/api"
+
+paths:
+  /people:
+    get:
+      operationId: "people.read"
+      tags:
+        - "People"
+      summary: "Get all people"
+      description: "Get all people"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              properties:
+                fname:
+                  type: string
+                lname:
+                  type: string
+                timestamp:
+                  type: string
+    
+    post:
+      operationId: "people.create"
+      tags:
+        - "People"
+      summary: "Create a person"
+      description: "Create a person"
+      parameters:
+        - name: person
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              fname:
+                type: string
+                description: "First name of the person"
+              lname:
+                type: string
+                description: "Last name of the person"
+      responses:
+        201:
+          description: "successful operation"
+
+  /people/{lname}:
+    get:
+      operationId: "people.read_one"
+      tags:
+        - "People"
+      summary: "Get a person by last name"
+      description: "Get a person by last name"
+      parameters:
+        - name: lname
+          in: path
+          required: true
+          type: string
+          description: "Last name of the person"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: object
+            properties:
+              fname:
+                type: string
+              lname:
+                type: string
+              timestamp:
+                type: string
+    
+    put:
+      operationId: "people.update"
+      tags:
+        - "People"
+      summary: "Update a person by last name"
+      description: "Update a person by last name"
+      parameters:
+        - name: lname
+          in: path
+          required: true
+          type: string
+          description: "Last name of the person"
+        - name: person
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              fname:
+                type: string
+                description: "First name of the person"
+              lname:
+                type: string
+                description: "Last name of the person"
+      responses:
+        200:
+          description: "successful operation"
+
+    delete:
+      operationId: "people.delete"
+      tags:
+        - "People"
+      summary: "Delete a person by last name"
+      description: "Delete a person by last name"
+      parameters:
+        - name: lname
+          in: path
+          required: true
+          type: string
+          description: "Last name of the person"
+      responses:
+        200:
+          description: "successful operation"
+                  
